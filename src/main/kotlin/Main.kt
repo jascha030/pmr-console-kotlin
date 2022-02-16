@@ -1,11 +1,13 @@
-fun main(command: String, args: Array<String>?) {
+fun main(args: Array<String>) {
 }
 
-fun init(args: Array<String>) {
-}
+private val availableCommands = listOf(::init, ::open, ::help).associateBy { it.name }
 
-fun open(args: Array<String>?) {
-}
+private fun dispatchCommandFromArgument(command: String, args: Array<String>?) =
+    availableCommands[command]?.invoke(args) ?: error("Invalid command: $command")
 
-fun help() {
-}
+fun init(args: Array<String>?) {}
+
+fun open(args: Array<String>?) {}
+
+fun help(args: Array<String>?) {}
